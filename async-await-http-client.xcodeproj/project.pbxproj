@@ -1,0 +1,658 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CECC9E3E2C7344CE00DF6720 /* async_await_http_clientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E3D2C7344CE00DF6720 /* async_await_http_clientApp.swift */; };
+		CECC9E402C7344CE00DF6720 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E3F2C7344CE00DF6720 /* ContentView.swift */; };
+		CECC9E422C7344CF00DF6720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E412C7344CF00DF6720 /* Assets.xcassets */; };
+		CECC9E452C7344CF00DF6720 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E442C7344CF00DF6720 /* Preview Assets.xcassets */; };
+		CECC9E502C7344CF00DF6720 /* async_await_http_clientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */; };
+		CECC9E5A2C7344CF00DF6720 /* async_await_http_clientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E592C7344CF00DF6720 /* async_await_http_clientUITests.swift */; };
+		CECC9E5C2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E5B2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift */; };
+		CECC9E6A2C73458500DF6720 /* BaseRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E692C73458500DF6720 /* BaseRequestModel.swift */; };
+		CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E6C2C7345DA00DF6720 /* HttpService.swift */; };
+		CECC9E6F2C73484200DF6720 /* HttpGetParameterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */; };
+		CECC9E712C73499700DF6720 /* HttpService+CustomerDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */; };
+		CECC9E752C734ADD00DF6720 /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E742C734ADD00DF6720 /* Consumption.swift */; };
+		CECC9E772C734BC300DF6720 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E762C734BC300DF6720 /* Customer.swift */; };
+		CECC9E7D2C734CBE00DF6720 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E7C2C734CBE00DF6720 /* Invoice.swift */; };
+		CECC9E7F2C734D5E00DF6720 /* CustomerRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E7E2C734D5E00DF6720 /* CustomerRequestModel.swift */; };
+		CECC9E812C736ED500DF6720 /* mock in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E802C736ED500DF6720 /* mock */; };
+		CECC9E832C73798800DF6720 /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E822C73798800DF6720 /* EnvironmentModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CECC9E4C2C7344CF00DF6720 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CECC9E322C7344CE00DF6720 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CECC9E392C7344CE00DF6720;
+			remoteInfo = "async-await-http-client";
+		};
+		CECC9E562C7344CF00DF6720 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CECC9E322C7344CE00DF6720 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CECC9E392C7344CE00DF6720;
+			remoteInfo = "async-await-http-client";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CECC9E3A2C7344CE00DF6720 /* async-await-http-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "async-await-http-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECC9E3D2C7344CE00DF6720 /* async_await_http_clientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientApp.swift; sourceTree = "<group>"; };
+		CECC9E3F2C7344CE00DF6720 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CECC9E412C7344CF00DF6720 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CECC9E442C7344CF00DF6720 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CECC9E462C7344CF00DF6720 /* async_await_http_client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = async_await_http_client.entitlements; sourceTree = "<group>"; };
+		CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "async-await-http-clientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientTests.swift; sourceTree = "<group>"; };
+		CECC9E552C7344CF00DF6720 /* async-await-http-clientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "async-await-http-clientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECC9E592C7344CF00DF6720 /* async_await_http_clientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientUITests.swift; sourceTree = "<group>"; };
+		CECC9E5B2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CECC9E692C73458500DF6720 /* BaseRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequestModel.swift; sourceTree = "<group>"; };
+		CECC9E6C2C7345DA00DF6720 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
+		CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpGetParameterBuilder.swift; sourceTree = "<group>"; };
+		CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpService+CustomerDomain.swift"; sourceTree = "<group>"; };
+		CECC9E742C734ADD00DF6720 /* Consumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
+		CECC9E762C734BC300DF6720 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		CECC9E7C2C734CBE00DF6720 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		CECC9E7E2C734D5E00DF6720 /* CustomerRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRequestModel.swift; sourceTree = "<group>"; };
+		CECC9E802C736ED500DF6720 /* mock */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mock; sourceTree = "<group>"; };
+		CECC9E822C73798800DF6720 /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CECC9E372C7344CE00DF6720 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECC9E482C7344CF00DF6720 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECC9E522C7344CF00DF6720 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CECC9E312C7344CE00DF6720 = {
+			isa = PBXGroup;
+			children = (
+				CECC9E3C2C7344CE00DF6720 /* async-await-http-client */,
+				CECC9E4E2C7344CF00DF6720 /* async-await-http-clientTests */,
+				CECC9E582C7344CF00DF6720 /* async-await-http-clientUITests */,
+				CECC9E3B2C7344CE00DF6720 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CECC9E3B2C7344CE00DF6720 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E3A2C7344CE00DF6720 /* async-await-http-client.app */,
+				CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */,
+				CECC9E552C7344CF00DF6720 /* async-await-http-clientUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CECC9E3C2C7344CE00DF6720 /* async-await-http-client */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E682C73455300DF6720 /* networking */,
+				CECC9E3D2C7344CE00DF6720 /* async_await_http_clientApp.swift */,
+				CECC9E3F2C7344CE00DF6720 /* ContentView.swift */,
+				CECC9E412C7344CF00DF6720 /* Assets.xcassets */,
+				CECC9E462C7344CF00DF6720 /* async_await_http_client.entitlements */,
+				CECC9E432C7344CF00DF6720 /* Preview Content */,
+				CECC9E822C73798800DF6720 /* EnvironmentModel.swift */,
+			);
+			path = "async-await-http-client";
+			sourceTree = "<group>";
+		};
+		CECC9E432C7344CF00DF6720 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E442C7344CF00DF6720 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CECC9E4E2C7344CF00DF6720 /* async-await-http-clientTests */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */,
+			);
+			path = "async-await-http-clientTests";
+			sourceTree = "<group>";
+		};
+		CECC9E582C7344CF00DF6720 /* async-await-http-clientUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E592C7344CF00DF6720 /* async_await_http_clientUITests.swift */,
+				CECC9E5B2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift */,
+			);
+			path = "async-await-http-clientUITests";
+			sourceTree = "<group>";
+		};
+		CECC9E682C73455300DF6720 /* networking */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E802C736ED500DF6720 /* mock */,
+				CECC9E6C2C7345DA00DF6720 /* HttpService.swift */,
+				CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */,
+				CECC9E692C73458500DF6720 /* BaseRequestModel.swift */,
+				CECC9E6B2C7345A900DF6720 /* customer-domain */,
+			);
+			path = networking;
+			sourceTree = "<group>";
+		};
+		CECC9E6B2C7345A900DF6720 /* customer-domain */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */,
+				CECC9E732C7349AC00DF6720 /* response-models */,
+				CECC9E722C73499F00DF6720 /* request-models */,
+			);
+			path = "customer-domain";
+			sourceTree = "<group>";
+		};
+		CECC9E722C73499F00DF6720 /* request-models */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E7E2C734D5E00DF6720 /* CustomerRequestModel.swift */,
+			);
+			path = "request-models";
+			sourceTree = "<group>";
+		};
+		CECC9E732C7349AC00DF6720 /* response-models */ = {
+			isa = PBXGroup;
+			children = (
+				CECC9E762C734BC300DF6720 /* Customer.swift */,
+				CECC9E742C734ADD00DF6720 /* Consumption.swift */,
+				CECC9E7C2C734CBE00DF6720 /* Invoice.swift */,
+			);
+			path = "response-models";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CECC9E392C7344CE00DF6720 /* async-await-http-client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CECC9E5F2C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-client" */;
+			buildPhases = (
+				CECC9E362C7344CE00DF6720 /* Sources */,
+				CECC9E372C7344CE00DF6720 /* Frameworks */,
+				CECC9E382C7344CE00DF6720 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "async-await-http-client";
+			productName = "async-await-http-client";
+			productReference = CECC9E3A2C7344CE00DF6720 /* async-await-http-client.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CECC9E4A2C7344CF00DF6720 /* async-await-http-clientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CECC9E622C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-clientTests" */;
+			buildPhases = (
+				CECC9E472C7344CF00DF6720 /* Sources */,
+				CECC9E482C7344CF00DF6720 /* Frameworks */,
+				CECC9E492C7344CF00DF6720 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CECC9E4D2C7344CF00DF6720 /* PBXTargetDependency */,
+			);
+			name = "async-await-http-clientTests";
+			productName = "async-await-http-clientTests";
+			productReference = CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CECC9E542C7344CF00DF6720 /* async-await-http-clientUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CECC9E652C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-clientUITests" */;
+			buildPhases = (
+				CECC9E512C7344CF00DF6720 /* Sources */,
+				CECC9E522C7344CF00DF6720 /* Frameworks */,
+				CECC9E532C7344CF00DF6720 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CECC9E572C7344CF00DF6720 /* PBXTargetDependency */,
+			);
+			name = "async-await-http-clientUITests";
+			productName = "async-await-http-clientUITests";
+			productReference = CECC9E552C7344CF00DF6720 /* async-await-http-clientUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CECC9E322C7344CE00DF6720 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					CECC9E392C7344CE00DF6720 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					CECC9E4A2C7344CF00DF6720 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = CECC9E392C7344CE00DF6720;
+					};
+					CECC9E542C7344CF00DF6720 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = CECC9E392C7344CE00DF6720;
+					};
+				};
+			};
+			buildConfigurationList = CECC9E352C7344CE00DF6720 /* Build configuration list for PBXProject "async-await-http-client" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CECC9E312C7344CE00DF6720;
+			productRefGroup = CECC9E3B2C7344CE00DF6720 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CECC9E392C7344CE00DF6720 /* async-await-http-client */,
+				CECC9E4A2C7344CF00DF6720 /* async-await-http-clientTests */,
+				CECC9E542C7344CF00DF6720 /* async-await-http-clientUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CECC9E382C7344CE00DF6720 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECC9E452C7344CF00DF6720 /* Preview Assets.xcassets in Resources */,
+				CECC9E422C7344CF00DF6720 /* Assets.xcassets in Resources */,
+				CECC9E812C736ED500DF6720 /* mock in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECC9E492C7344CF00DF6720 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECC9E532C7344CF00DF6720 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CECC9E362C7344CE00DF6720 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECC9E402C7344CE00DF6720 /* ContentView.swift in Sources */,
+				CECC9E7F2C734D5E00DF6720 /* CustomerRequestModel.swift in Sources */,
+				CECC9E712C73499700DF6720 /* HttpService+CustomerDomain.swift in Sources */,
+				CECC9E752C734ADD00DF6720 /* Consumption.swift in Sources */,
+				CECC9E772C734BC300DF6720 /* Customer.swift in Sources */,
+				CECC9E832C73798800DF6720 /* EnvironmentModel.swift in Sources */,
+				CECC9E3E2C7344CE00DF6720 /* async_await_http_clientApp.swift in Sources */,
+				CECC9E6F2C73484200DF6720 /* HttpGetParameterBuilder.swift in Sources */,
+				CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */,
+				CECC9E6A2C73458500DF6720 /* BaseRequestModel.swift in Sources */,
+				CECC9E7D2C734CBE00DF6720 /* Invoice.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECC9E472C7344CF00DF6720 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECC9E502C7344CF00DF6720 /* async_await_http_clientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECC9E512C7344CF00DF6720 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECC9E5A2C7344CF00DF6720 /* async_await_http_clientUITests.swift in Sources */,
+				CECC9E5C2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CECC9E4D2C7344CF00DF6720 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CECC9E392C7344CE00DF6720 /* async-await-http-client */;
+			targetProxy = CECC9E4C2C7344CF00DF6720 /* PBXContainerItemProxy */;
+		};
+		CECC9E572C7344CF00DF6720 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CECC9E392C7344CE00DF6720 /* async-await-http-client */;
+			targetProxy = CECC9E562C7344CF00DF6720 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CECC9E5D2C7344CF00DF6720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CECC9E5E2C7344CF00DF6720 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		CECC9E602C7344CF00DF6720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "async-await-http-client/async_await_http_client.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"async-await-http-client/Preview Content\"";
+				DEVELOPMENT_TEAM = H5727LQSV7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-client";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CECC9E612C7344CF00DF6720 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "async-await-http-client/async_await_http_client.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"async-await-http-client/Preview Content\"";
+				DEVELOPMENT_TEAM = H5727LQSV7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-client";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CECC9E632C7344CF00DF6720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H5727LQSV7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-clientTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/async-await-http-client.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/async-await-http-client";
+			};
+			name = Debug;
+		};
+		CECC9E642C7344CF00DF6720 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H5727LQSV7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-clientTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/async-await-http-client.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/async-await-http-client";
+			};
+			name = Release;
+		};
+		CECC9E662C7344CF00DF6720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H5727LQSV7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-clientUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "async-await-http-client";
+			};
+			name = Debug;
+		};
+		CECC9E672C7344CF00DF6720 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H5727LQSV7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-clientUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "async-await-http-client";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CECC9E352C7344CE00DF6720 /* Build configuration list for PBXProject "async-await-http-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECC9E5D2C7344CF00DF6720 /* Debug */,
+				CECC9E5E2C7344CF00DF6720 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CECC9E5F2C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECC9E602C7344CF00DF6720 /* Debug */,
+				CECC9E612C7344CF00DF6720 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CECC9E622C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-clientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECC9E632C7344CF00DF6720 /* Debug */,
+				CECC9E642C7344CF00DF6720 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CECC9E652C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-clientUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECC9E662C7344CF00DF6720 /* Debug */,
+				CECC9E672C7344CF00DF6720 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CECC9E322C7344CE00DF6720 /* Project object */;
+}

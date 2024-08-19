@@ -1,0 +1,7 @@
+{
+   "customer": {
+       "customerId": 1,
+       "firstName": "Test",
+       "lastName": "Testsson"
+   }
+}
