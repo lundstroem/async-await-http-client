@@ -9,7 +9,7 @@ import Foundation
 
 extension HttpService {
 
-    func fetchCustomer(personalNumber: String) async throws -> CustomerResponse.Customer? {
+    func fetchCustomer(personalNumber: String) async throws -> CustomerResponse.CustomerResponseObject? {
         let url = baseUrl+"api/v1/customers/customer"
         let requestModel = CustomerRequestModel(personalNumber: personalNumber)
         let responseContent: ResponseContent = try await makeRequest(urlString: url,
@@ -17,7 +17,7 @@ extension HttpService {
                                                                      httpBody: requestModel.makeHttpBodyData(),
                                                                      contentType: .json)
         if responseContent.statusCode == 200 {
-            let object = try await decodeResponseData(decodable: CustomerResponse.Customer.self, responseContent: responseContent)
+            let object = try await decodeResponseData(decodable: CustomerResponse.CustomerResponseObject.self, responseContent: responseContent)
             return object
         }
         return nil

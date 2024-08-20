@@ -162,23 +162,6 @@ private extension HttpService {
             request.httpBody = httpBody
         }
 
-        /* TODO: If mock is active, fetch contents from file according to url pattern to match the file structure.
-
-         "Customers/customer/200-GET.json"
-
-         or
-
-         "Customers/customer/123/contracts/200-GET.json"
-
-         baseUrl needs to be omitted.
-
-         */
-
-
-        /*
-        let (data, response) = try await URLSession.shared.data(for: request)
-         */
-
         let (data, response) = try await loadData(request: request)
 
         guard let response = response as? HTTPURLResponse else {
@@ -189,7 +172,7 @@ private extension HttpService {
             printStatusCode(response: response, urlString: urlString)
         }
 
-        return ResponseContent(urlString: urlString, statusCode: response.statusCode, data: data)
+        return ResponseContent(urlString: response.url?.absoluteString ?? "", statusCode: response.statusCode, data: data)
     }
 }
 
@@ -197,10 +180,10 @@ private extension HttpService {
 
 private extension HttpService {
 
-    func loadData(request: URLRequest) async throws -> (Data?, URLResponse?) {
+    func loadData(request: URLRequest, mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
 
         if useMock {
-            let (data, response) = try await loadMock(request: request)
+            let (data, response) = try await loadMock(request: request, mockResponseStatusCode: mockResponseStatusCode)
             return (data, response)
         }
 
@@ -208,36 +191,28 @@ private extension HttpService {
         return (data, response)
     }
 
-    func loadMock(request: URLRequest) async throws -> (Data?, URLResponse?) {
+    func loadMock(request: URLRequest, mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
 
-        if let urlString = request.url?.absoluteString {
+        var statusCode = 200
+        if let mockResponseStatusCode = mockResponseStatusCode {
+            statusCode = mockResponseStatusCode
+        }
 
-            var filePath = urlString
+        if let url = request.url {
+
+            var filePath = url.absoluteString
             filePath.trimPrefix(baseUrl)
             filePath = "mock/" + filePath
 
-            /* TODO: 
-             - Handle various HTTP method mappings
-             - Add various error response versions if necessary for example 500-POST.json etc.
+            let fileName = "\(statusCode)-\(request.httpMethod ?? "")"
 
-             */
+            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: "json", filePath: filePath),
+               let url = URL(string: filePath) {
 
-            let fullFilePath = Bundle.main.path(forResource:"200-POST", ofType:"json", inDirectory:filePath)
-
-            if let fullFilePath = fullFilePath {
-                print("file: \(fullFilePath)")
-
-                do {
-                    let contents = try String(contentsOfFile: fullFilePath)
-                    print(contents)
-                } catch {
-                    // contents could not be loaded
-                }
-            } else {
-                print("no file")
+                let urlResponse = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: "", headerFields: [:])
+                return (data, urlResponse)
             }
         }
-
         return (nil, nil)
     }
 }
@@ -250,7 +225,7 @@ private extension HttpService {
         if response.statusCode >= 400  {
             let errorString = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             let error = NSError(domain: "", code: response.statusCode, userInfo: [
-                NSLocalizedDescriptionKey: "Server responded with status: \(response.statusCode) (\(errorString)) for url:\(urlString)"
+                NSLocalizedDescriptionKey: "Server responded with status: \(response.statusCode) (\(errorString)) for url:\(response.url?.absoluteString ?? "")"
             ])
             print("\(error.localizedDescription)")
         }

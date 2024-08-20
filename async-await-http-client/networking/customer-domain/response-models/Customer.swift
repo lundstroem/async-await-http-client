@@ -20,11 +20,7 @@ class CustomerResponse {
      */
 
     struct CustomerResponseObject: Codable, Hashable {
-        var customer: Customer
-    }
-
-    struct Customer: Codable, Hashable {
-        var customerId: Int64
+        var customerId: Int
         var firstName: String
         var lastName: String
     }

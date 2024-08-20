@@ -20,7 +20,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear() {
-            environmentModel.fetchCustomer()
+            environmentModel.fetchData()
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE5F605A2C74601700020F2A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F60592C74601700020F2A /* Utils.swift */; };
 		CECC9E3E2C7344CE00DF6720 /* async_await_http_clientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E3D2C7344CE00DF6720 /* async_await_http_clientApp.swift */; };
 		CECC9E402C7344CE00DF6720 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E3F2C7344CE00DF6720 /* ContentView.swift */; };
 		CECC9E422C7344CF00DF6720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E412C7344CF00DF6720 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE5F60592C74601700020F2A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CECC9E3A2C7344CE00DF6720 /* async-await-http-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "async-await-http-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECC9E3D2C7344CE00DF6720 /* async_await_http_clientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientApp.swift; sourceTree = "<group>"; };
 		CECC9E3F2C7344CE00DF6720 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				CECC9E6C2C7345DA00DF6720 /* HttpService.swift */,
 				CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */,
 				CECC9E692C73458500DF6720 /* BaseRequestModel.swift */,
+				CE5F60592C74601700020F2A /* Utils.swift */,
 				CECC9E6B2C7345A900DF6720 /* customer-domain */,
 			);
 			path = networking;
@@ -333,6 +336,7 @@
 				CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */,
 				CECC9E6A2C73458500DF6720 /* BaseRequestModel.swift in Sources */,
 				CECC9E7D2C734CBE00DF6720 /* Invoice.swift in Sources */,
+				CE5F605A2C74601700020F2A /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

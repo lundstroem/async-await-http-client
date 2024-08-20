@@ -38,7 +38,7 @@ extension CustomerResponse {
         var invoiceId: Int64
         var invoiceDate: String
         var presentDueDate: String
-        var amount: Double
+        var amount: String
     }
 
     struct InvoiceListResponseObject: Codable, Hashable {

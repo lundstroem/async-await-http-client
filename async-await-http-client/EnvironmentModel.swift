@@ -10,23 +10,16 @@ import Foundation
 @MainActor
 final class EnvironmentModel: ObservableObject {
 
+    @Published var customer: CustomerResponse.CustomerResponseObject?
+    @Published var consumption: CustomerResponse.ConsumptionResponse?
     @Published var invoiceListResponse: CustomerResponse.InvoiceListResponseObject?
 
-    func fetchCustomer() {
+    func fetchData() {
         Task {
             do {
-                let customer = try await HttpService.shared.fetchCustomer(personalNumber: "")
-            } catch {
-                print("error \(error)")
-            }
-        }
-    }
-
-    func fetchInvoiceList() {
-        Task {
-            do {
-                // TODO: Remove hardcoded customerCode.
-                invoiceListResponse = try await HttpService.shared.fetchInvoices(customerCode: "436075")
+                customer = try await HttpService.shared.fetchCustomer(personalNumber: "")
+                consumption = try await HttpService.shared.fetchCustomerConsumption(id: 1, type: 1)
+                invoiceListResponse = try await HttpService.shared.fetchInvoices(customerCode: "1")
             } catch {
                 print("error \(error)")
             }
