@@ -25,7 +25,10 @@ final class EnvironmentModel: ObservableObject {
                 let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "2")
                 let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "3")
 
-                let _ = try await HttpService.shared.verifyCustomer(customerId: "1")
+                /* test various mock status codes */
+                let _ = try await HttpService.shared.verifyCustomer(customerId: "1", mockStatusCode: 200)
+                let _ = try await HttpService.shared.verifyCustomer(customerId: "1", mockStatusCode: 400)
+                let _ = try await HttpService.shared.verifyCustomer(customerId: "1", mockStatusCode: 500)
 
             } catch {
                 print("error \(error)")

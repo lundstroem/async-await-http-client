@@ -7,9 +7,6 @@
 
 import Foundation
 
-// TODO: Need to check nullability for all response parameters. (Check API docs).
-// TODO: Check if JWT should be included in standard, or if any other auth should be default.
-
 enum FetchError: Error {
     case noValidResponse
     case wrongStatusCode(_ statusCode: Int)
@@ -28,7 +25,7 @@ enum HttpMethod: String {
 }
 
 enum ContentType: String {
-    /* add more content-types if needed */
+    /* add more content-types when needed */
     case unspecified = "application/octet-stream"
     case json = "application/json"
     case pdf = "application/pdf"
@@ -47,65 +44,32 @@ struct AuthHeader {
 
 class HttpService {
 
-    static var shared: HttpService = HttpService()
+    static var shared: HttpService = HttpService(useMock: false)
     let baseUrl: String = "http://127.0.0.1:7043/"
 
-    private let useMock: Bool = true
+    private let useMock: Bool
     private let debugPrintEnabled: Bool = true
-
-    private let endpointLogin: String = "Login"
-    private var jsonWebToken: String?
-
-    private let apiKey: String = ""
-    private let apiValue: String = ""
 
     func makeRequest(urlString: String,
                      httpMethod: HttpMethod = .get,
                      httpBody: Data? = nil,
+                     mockResponseStatusCode: Int? = nil,
                      contentType: ContentType) async throws -> ResponseContent {
 
-        /*
-        if apiKey.isEmpty && apiValue.isEmpty {
-            print("Need to set apiKey and apiValue to enable requests to middleware.")
-        }
-
-        if jsonWebToken == nil {
-            try await fetchToken()
-        }
-
-        guard let jsonWebToken = jsonWebToken else {
-            throw FetchError.missingToken
-        }
-
-         */
-
-        let authHeader = AuthHeader(key: "Authorization", value: "Bearer \(jsonWebToken ?? "")")
+        /* Add auth method, api keys and anything else depending on project */
 
         let responseContent: ResponseContent = try await makeRequestInternal(urlString: urlString,
                                                                              httpMethod: httpMethod,
                                                                              httpBody: httpBody,
-                                                                             authHeader: authHeader,
+                                                                             authHeader: nil,
+                                                                             mockResponseStatusCode: mockResponseStatusCode,
                                                                              contentType: contentType)
 
         return responseContent
+    }
 
-        /*
-        if responseContent.statusCode == 401 {
-            // Token has expired, fetch a new one and retry the original request.
-
-            self.jsonWebToken = nil
-            try await fetchToken()
-
-            let responseContent: ResponseContent = try await makeRequestInternal(urlString: urlString,
-                                                                                 httpMethod: httpMethod,
-                                                                                 httpBody: httpBody,
-                                                                                 authHeader: authHeader,
-                                                                                 contentType: contentType)
-            return responseContent
-
-        } else {
-            return responseContent
-        }*/
+    init(useMock: Bool) {
+        self.useMock = useMock
     }
 
     func decodeResponseData<T: Decodable>(decodable: T.Type,
@@ -128,21 +92,11 @@ class HttpService {
 
 private extension HttpService {
 
-    func fetchToken() async throws {
-        let responseContent: ResponseContent = try await makeRequestInternal(urlString: baseUrl+endpointLogin,
-                                                                             httpMethod: .post,
-                                                                             authHeader: AuthHeader(key: apiKey, value: apiValue),
-                                                                             contentType: .json)
-        if let data = responseContent.data,
-           let token = String(data: data, encoding: .utf8) {
-            self.jsonWebToken = token.replacingOccurrences(of: "\"", with: "")
-        }
-    }
-
     func makeRequestInternal(urlString: String,
                              httpMethod: HttpMethod = .get,
                              httpBody: Data? = nil,
                              authHeader: AuthHeader? = nil,
+                             mockResponseStatusCode: Int? = nil,
                              contentType: ContentType) async throws -> ResponseContent {
 
         guard let url = URL(string: urlString) else { fatalError("Missing URL") }
@@ -159,7 +113,7 @@ private extension HttpService {
             request.httpBody = httpBody
         }
 
-        let (data, response) = try await loadData(request: request)
+        let (data, response) = try await loadData(request: request, mockResponseStatusCode: mockResponseStatusCode)
 
         guard let response = response as? HTTPURLResponse else {
             throw FetchError.noValidResponse
@@ -191,9 +145,6 @@ private extension HttpService {
 
     func loadMock(request: URLRequest, 
                   mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-
-        /* Add example request which does not return JSON. It should still verify ok.
-         Easiest to add empty 200 json? */
 
         var statusCode = 200
         if let mockResponseStatusCode = mockResponseStatusCode {
@@ -234,11 +185,11 @@ private extension HttpService {
         if response.statusCode >= 400  {
             let errorString = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             let error = NSError(domain: "", code: response.statusCode, userInfo: [
-                NSLocalizedDescriptionKey: "Server responded with status: \(response.statusCode) (\(errorString)) for url:\(response.url?.absoluteString ?? "")"
+                NSLocalizedDescriptionKey: "Server responded with status: \(response.statusCode) (\(errorString)) for url: \(response.url?.absoluteString ?? "")"
             ])
             print("\(error.localizedDescription)")
         } else {
-            print("Server responded with status: \(response.statusCode) for url:\(response.url?.absoluteString ?? "")")
+            print("Server responded with status: \(response.statusCode) for url: \(response.url?.absoluteString ?? "")")
         }
     }
 

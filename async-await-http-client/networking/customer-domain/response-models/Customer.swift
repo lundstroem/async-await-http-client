@@ -9,16 +9,6 @@ import Foundation
 
 class CustomerResponse {
 
-    /*
-     {
-        "customer": {
-            "customerId": 1,
-            "firstName": "Test",
-            "lastName": "Testsson"
-        }
-     }
-     */
-
     struct CustomerResponseObject: Codable, Hashable {
         var customerId: Int
         var firstName: String

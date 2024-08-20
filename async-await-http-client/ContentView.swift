@@ -20,7 +20,9 @@ struct ContentView: View {
         }
         .padding()
         .onAppear() {
+            /*
             environmentModel.fetchData()
+             */
         }
     }
 }

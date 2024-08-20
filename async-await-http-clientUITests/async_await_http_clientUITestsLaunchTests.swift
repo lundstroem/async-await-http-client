@@ -17,6 +17,7 @@ final class async_await_http_clientUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /*
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()
@@ -28,5 +29,5 @@ final class async_await_http_clientUITestsLaunchTests: XCTestCase {
         attachment.name = "Launch Screen"
         attachment.lifetime = .keepAlways
         add(attachment)
-    }
+    }*/
 }

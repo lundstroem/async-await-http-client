@@ -9,14 +9,6 @@ import Foundation
 
 extension CustomerResponse {
 
-    /*
-     {
-        "periodicValues": [
-            1, 2, 3
-        ]
-     }
-     */
-
     struct ConsumptionResponse: Codable, Hashable {
         var periodicValues: [Int]
     }

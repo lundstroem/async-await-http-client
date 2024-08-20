@@ -24,7 +24,8 @@ extension HttpService {
     }
 
     func fetchCustomerConsumption(id: Int64,
-                                  type: Int32) async throws -> CustomerResponse.ConsumptionResponse? {
+                                  type: Int32,
+                                  mockStatusCode: Int? = nil) async throws -> CustomerResponse.ConsumptionResponse? {
 
         let getRequestBuilder = HttpGetParameterBuilder()
 
@@ -52,7 +53,7 @@ extension HttpService {
                                                       responseContent: responseContent)
 
             // Sort invoices
-            
+
             var invoiceArray = object.invoiceParts.compactMap { $0 }
             invoiceArray.sort { $0.presentDueDate > $1.presentDueDate }
             object.invoiceParts = invoiceArray
@@ -72,14 +73,12 @@ extension HttpService {
         return nil
     }
 
-    func verifyCustomer(customerId: String) async throws -> ResponseContent? {
+    func verifyCustomer(customerId: String, mockStatusCode: Int? = nil) async throws -> ResponseContent? {
         let url = baseUrl+"api/v1/customers/customer/verify/\(customerId)"
         let responseContent: ResponseContent = try await makeRequest(urlString: url,
                                                                      httpMethod: .post,
+                                                                     mockResponseStatusCode: mockStatusCode,
                                                                      contentType: .unspecified)
-        if responseContent.statusCode == 200 {
-            return responseContent
-        }
-        return nil
+        return responseContent
     }
 }
