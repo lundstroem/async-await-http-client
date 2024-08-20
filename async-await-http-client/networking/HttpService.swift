@@ -29,6 +29,7 @@ enum HttpMethod: String {
 
 enum ContentType: String {
     /* add more content-types if needed */
+    case unspecified = "application/octet-stream"
     case json = "application/json"
     case pdf = "application/pdf"
 }

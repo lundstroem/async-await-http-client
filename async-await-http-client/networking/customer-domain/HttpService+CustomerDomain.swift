@@ -71,4 +71,15 @@ extension HttpService {
         }
         return nil
     }
+
+    func verifyCustomer(customerId: String) async throws -> ResponseContent? {
+        let url = baseUrl+"api/v1/customers/customer/verify/\(customerId)"
+        let responseContent: ResponseContent = try await makeRequest(urlString: url,
+                                                                     httpMethod: .post,
+                                                                     contentType: .unspecified)
+        if responseContent.statusCode == 200 {
+            return responseContent
+        }
+        return nil
+    }
 }
