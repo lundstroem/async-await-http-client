@@ -14,7 +14,6 @@ enum FetchError: Error {
     case noValidResponse
     case wrongStatusCode(_ statusCode: Int)
     case missingToken
-    case useMockIsActivated
 }
 
 enum HttpMethod: String {
@@ -48,9 +47,9 @@ struct AuthHeader {
 class HttpService {
 
     static var shared: HttpService = HttpService()
+    let baseUrl: String = "http://127.0.0.1:7043/"
 
     private let useMock: Bool = true
-    let baseUrl: String = "http://192.168.0.1:7043/"
     private let debugPrintEnabled: Bool = true
 
     private let endpointLogin: String = "Login"
@@ -63,12 +62,6 @@ class HttpService {
                      httpMethod: HttpMethod = .get,
                      httpBody: Data? = nil,
                      contentType: ContentType) async throws -> ResponseContent {
-
-        /*
-        guard !useMock else {
-            print("App is using mocked data.")
-            throw FetchError.useMockIsActivated
-        }*/
 
         /*
         if apiKey.isEmpty && apiValue.isEmpty {
@@ -84,8 +77,8 @@ class HttpService {
         }
 
          */
-        let authHeader = AuthHeader(key: "Authorization", value: "Bearer \(jsonWebToken ?? "")")
 
+        let authHeader = AuthHeader(key: "Authorization", value: "Bearer \(jsonWebToken ?? "")")
 
         let responseContent: ResponseContent = try await makeRequestInternal(urlString: urlString,
                                                                              httpMethod: httpMethod,
@@ -93,6 +86,9 @@ class HttpService {
                                                                              authHeader: authHeader,
                                                                              contentType: contentType)
 
+        return responseContent
+
+        /*
         if responseContent.statusCode == 401 {
             // Token has expired, fetch a new one and retry the original request.
 
@@ -108,7 +104,7 @@ class HttpService {
 
         } else {
             return responseContent
-        }
+        }*/
     }
 
     func decodeResponseData<T: Decodable>(decodable: T.Type,
@@ -183,7 +179,8 @@ private extension HttpService {
     func loadData(request: URLRequest, mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
 
         if useMock {
-            let (data, response) = try await loadMock(request: request, mockResponseStatusCode: mockResponseStatusCode)
+            let (data, response) = try await loadMock(request: request,
+                                                      mockResponseStatusCode: mockResponseStatusCode)
             return (data, response)
         }
 
@@ -191,11 +188,22 @@ private extension HttpService {
         return (data, response)
     }
 
-    func loadMock(request: URLRequest, mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+    func loadMock(request: URLRequest, 
+                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+
+        /* Add example request which does not return JSON. It should still verify ok.
+         Easiest to add empty 200 json? */
 
         var statusCode = 200
         if let mockResponseStatusCode = mockResponseStatusCode {
             statusCode = mockResponseStatusCode
+        }
+
+        let contentType = request.value(forHTTPHeaderField: "Content-Type")
+        var fileEnding = "json"
+
+        if (contentType == "application/pdf") {
+            fileEnding = "pdf"
         }
 
         if let url = request.url {
@@ -206,7 +214,7 @@ private extension HttpService {
 
             let fileName = "\(statusCode)-\(request.httpMethod ?? "")"
 
-            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: "json", filePath: filePath),
+            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: fileEnding, filePath: filePath),
                let url = URL(string: filePath) {
 
                 let urlResponse = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: "", headerFields: [:])
@@ -228,6 +236,8 @@ private extension HttpService {
                 NSLocalizedDescriptionKey: "Server responded with status: \(response.statusCode) (\(errorString)) for url:\(response.url?.absoluteString ?? "")"
             ])
             print("\(error.localizedDescription)")
+        } else {
+            print("Server responded with status: \(response.statusCode) for url:\(response.url?.absoluteString ?? "")")
         }
     }
 
@@ -242,7 +252,7 @@ private extension HttpService {
     func parseDebug<T: Decodable>(responseType: T.Type, responseContent: ResponseContent) {
         guard let data = responseContent.data else { return }
 
-        print("\(responseContent.statusCode) response received from:\(responseContent.urlString)")
+        print("Parsing content received from: \(responseContent.urlString)")
         print("\(prettyPrintedJSONString(data) ?? "(error: cannot parse response)")")
 
         do {

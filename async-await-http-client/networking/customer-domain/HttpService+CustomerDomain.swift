@@ -44,7 +44,7 @@ extension HttpService {
     }
 
     func fetchInvoices(customerCode: String) async throws -> CustomerResponse.InvoiceListResponseObject? {
-        let url = baseUrl+"api/v1/customers/customer/\(customerCode)/invoices"
+        let url = baseUrl+"api/v1/customers/\(customerCode)/invoices"
         let responseContent: ResponseContent = try await makeRequest(urlString: url,
                                                                      contentType: .json)
         if responseContent.statusCode == 200 {

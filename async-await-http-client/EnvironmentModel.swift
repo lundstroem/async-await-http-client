@@ -20,6 +20,11 @@ final class EnvironmentModel: ObservableObject {
                 customer = try await HttpService.shared.fetchCustomer(personalNumber: "")
                 consumption = try await HttpService.shared.fetchCustomerConsumption(id: 1, type: 1)
                 invoiceListResponse = try await HttpService.shared.fetchInvoices(customerCode: "1")
+
+                let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "1")
+                let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "2")
+                let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "3")
+
             } catch {
                 print("error \(error)")
             }
