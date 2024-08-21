@@ -34,57 +34,75 @@ final class async_await_http_clientTests: XCTestCase {
     }
 
     func testFetchMockCustomer() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.fetchCustomer(personalNumber: "")
         XCTAssertNotNil(response)
     }
 
     func testFetchMockConsumption() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.fetchCustomerConsumption(id: 1, type: 1)
         XCTAssertNotNil(response?.periodicValues)
     }
 
     func testFetchMockInvoices() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.fetchInvoices(customerCode: "1")
         XCTAssertNotNil(response?.invoiceParts)
     }
 
     func testFetchMockInvoice1() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.fetchInvoice(invoiceNumber: "1")
         XCTAssertNotNil(response?.data)
     }
 
     func testFetchMockInvoice2() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.fetchInvoice(invoiceNumber: "2")
         XCTAssertNotNil(response?.data)
     }
 
     func testFetchMockInvoice3() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.fetchInvoice(invoiceNumber: "3")
         XCTAssertNotNil(response?.data)
     }
 
     func testFetchMockVerification() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 200)
         XCTAssertTrue(response?.statusCode == 200)
     }
 
     func testMockVerificationWithStatus400() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 400)
         XCTAssertTrue(response?.statusCode == 400)
     }
 
     func testMockVerificationWithStatus500() async throws {
-        let httpService = HttpService(useMock: true)
+        let httpService = await HttpService(useMock: true)
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 500)
         XCTAssertTrue(response?.statusCode == 500)
     }
 
+    func testCustomerRequestModelEncoding() {
+        let requestModel = CustomerRequestModel(personalNumber: "1")
+        let data = requestModel.makeHttpBodyData()
+
+        guard let data = data else {
+            XCTFail()
+            return
+        }
+
+        let jsonString = String(data: data, encoding: .utf8)
+        guard let jsonString = jsonString else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertTrue(jsonString.contains("\"PersonalNumber\""))
+
+    }
 }

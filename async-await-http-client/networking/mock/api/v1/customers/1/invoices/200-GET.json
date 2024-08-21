@@ -1,22 +1,22 @@
 {
     "invoiceParts": [
         {
-            "invoiceId": 1,
-            "invoiceDate": "2024-04-01",
-            "presentDueDate": "2024-04-28",
-            "amount": "1042.0"
+            "InvoiceId": 1,
+            "InvoiceDate": "2024-04-01",
+            "PresentDueDate": "2024-04-28",
+            "Amount": "1042.0"
         },
         {
-            "invoiceId": 2,
-            "invoiceDate": "2024-05-01",
-            "presentDueDate": "2024-05-28",
-            "amount": "2146.0"
+            "InvoiceId": 2,
+            "InvoiceDate": "2024-05-01",
+            "PresentDueDate": "2024-05-28",
+            "Amount": "2146.0"
         },
         {
-            "invoiceId": 3,
-            "invoiceDate": "2024-06-01",
-            "presentDueDate": "2024-06-28",
-            "amount": "2146.0"
+            "InvoiceId": 3,
+            "InvoiceDate": "2024-06-01",
+            "PresentDueDate": "2024-06-28",
+            "Amount": "2146.0"
         }
     ]
 }

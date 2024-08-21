@@ -7,11 +7,16 @@
 
 import Foundation
 
-class CustomerRequestModel: BaseRequestModel {
+struct CustomerRequestModel: Encodable {
 
-    private let personalNumber: String
+    let personalNumber: String
 
-    init(personalNumber: String) {
-        self.personalNumber = personalNumber
+    enum CodingKeys: String, CodingKey {
+        case personalNumber = "PersonalNumber"
+    }
+
+    func makeHttpBodyData() -> Data? {
+        let parsedBody = try? JSONEncoder().encode(self)
+        return parsedBody
     }
 }

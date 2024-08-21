@@ -10,9 +10,7 @@ import Foundation
 class Utils {
 
     static func loadResourceFromBundle(name: String, fileEnding: String, filePath: String) -> Data? {
-
         let completeFilePath = Bundle.main.path(forResource:name, ofType:fileEnding, inDirectory:filePath)
-
         if let completeFilePath = completeFilePath {
             do {
                 let contents = try Data(contentsOf: URL(fileURLWithPath: completeFilePath))
@@ -23,7 +21,6 @@ class Utils {
         } else {
             print("no file exists at path: \(filePath)/\(name).\(fileEnding)")
         }
-
         return nil
     }
 }

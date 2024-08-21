@@ -14,6 +14,14 @@ extension CustomerResponse {
         var invoiceDate: String
         var presentDueDate: String
         var amount: String
+
+        /* Example of handling capitalized keys in response */
+        enum CodingKeys: String, CodingKey {
+            case invoiceId = "InvoiceId"
+            case invoiceDate = "InvoiceDate"
+            case presentDueDate = "PresentDueDate"
+            case amount = "Amount"
+        }
     }
 
     struct InvoiceListResponseObject: Codable, Hashable {

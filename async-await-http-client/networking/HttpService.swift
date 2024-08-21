@@ -9,8 +9,6 @@ import Foundation
 
 enum FetchError: Error {
     case noValidResponse
-    case wrongStatusCode(_ statusCode: Int)
-    case missingToken
 }
 
 enum HttpMethod: String {
@@ -25,7 +23,7 @@ enum HttpMethod: String {
 }
 
 enum ContentType: String {
-    /* add more content-types when needed */
+    /* add more content-types if needed */
     case unspecified = "application/octet-stream"
     case json = "application/json"
     case pdf = "application/pdf"
@@ -42,9 +40,12 @@ struct AuthHeader {
     let value: String
 }
 
+@MainActor
 class HttpService {
 
-    static var shared: HttpService = HttpService(useMock: false)
+    /* Change useMock flag here to switch between mock and remote */
+    static let shared: HttpService = HttpService(useMock: true)
+
     let baseUrl: String = "http://127.0.0.1:7043/"
 
     private let useMock: Bool
@@ -56,7 +57,7 @@ class HttpService {
                      mockResponseStatusCode: Int? = nil,
                      contentType: ContentType) async throws -> ResponseContent {
 
-        /* Add auth method, api keys and anything else depending on project */
+        /* Add auth method, api keys and anything else depending on REST API setup */
 
         let responseContent: ResponseContent = try await makeRequestInternal(urlString: urlString,
                                                                              httpMethod: httpMethod,
@@ -127,12 +128,52 @@ private extension HttpService {
     }
 }
 
+// MARK: - URLSession extension
+
+extension URLSession {
+
+    /*
+     To get around the warning: "Passing argument of non-sendable type '(any URLSessionTaskDelegate)?'
+     outside of main actor-isolated context may introduce data races" when using Strict Concurrency Checking Complete:
+
+     The warning is talking about the delegate parameter of data(from:delegate:). This parameter has a default value (nil)
+     so it is still passed, even if you are not passing anything explicitly.
+
+     The Task is running in a main actor-isolated context, but data(from:delegate:) is not isolated to the main actor,
+     hence you are passing the delegate from a main actor-isolated context, to a non-isolated context. "Outside of main
+     actor-isolated context" as the warning says.
+
+     So you should call data(from:delegate:) from a non-isolated context in the first place. A simple way to do that is
+     to create a wrapper of data(from:delegate) which does not have a delegate parameter.
+
+     extension URLSession {
+         func data(from url: URL) async throws -> (Data, URLResponse) {
+             // this call is in a non-isolated context, so all is good :)
+             try await URLSession.shared.data(from: url, delegate: nil)
+         }
+     }
+
+     After that, the call in your Task { ... } will automatically resolve to the overload above. You are still calling a
+     non-isolated function from a main actor-isolated context, but this time, you are no longer passing a URLSessionTaskDelegate
+     (and URL is Sendable), so there are no warnings.
+
+     Side note: in a View, consider using the task and task(id:) modifiers instead of creating a top level Task { ... }. These
+     modifiers cancels the task automatically when the view disappears.
+
+     https://stackoverflow.com/questions/78763125/passing-argument-of-non-sendable-type-any-urlsessiontaskdelegate-outside-of
+     */
+
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        try await URLSession.shared.data(for: request, delegate: nil)
+    }
+}
+
 // MARK: - Mock
 
 private extension HttpService {
 
-    func loadData(request: URLRequest, mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-
+    func loadData(request: URLRequest, 
+                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
         if useMock {
             let (data, response) = try await loadMock(request: request,
                                                       mockResponseStatusCode: mockResponseStatusCode)
@@ -145,7 +186,6 @@ private extension HttpService {
 
     func loadMock(request: URLRequest, 
                   mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-
         var statusCode = 200
         if let mockResponseStatusCode = mockResponseStatusCode {
             statusCode = mockResponseStatusCode
@@ -157,6 +197,8 @@ private extension HttpService {
         if (contentType == "application/pdf") {
             fileEnding = "pdf"
         }
+
+        /* add more mockable types if needed */
 
         if let url = request.url {
 
