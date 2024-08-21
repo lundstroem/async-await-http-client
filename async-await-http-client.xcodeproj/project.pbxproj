@@ -13,8 +13,6 @@
 		CECC9E422C7344CF00DF6720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E412C7344CF00DF6720 /* Assets.xcassets */; };
 		CECC9E452C7344CF00DF6720 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E442C7344CF00DF6720 /* Preview Assets.xcassets */; };
 		CECC9E502C7344CF00DF6720 /* async_await_http_clientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */; };
-		CECC9E5A2C7344CF00DF6720 /* async_await_http_clientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E592C7344CF00DF6720 /* async_await_http_clientUITests.swift */; };
-		CECC9E5C2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E5B2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift */; };
 		CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E6C2C7345DA00DF6720 /* HttpService.swift */; };
 		CECC9E6F2C73484200DF6720 /* HttpGetParameterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */; };
 		CECC9E712C73499700DF6720 /* HttpService+CustomerDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */; };
@@ -34,13 +32,6 @@
 			remoteGlobalIDString = CECC9E392C7344CE00DF6720;
 			remoteInfo = "async-await-http-client";
 		};
-		CECC9E562C7344CF00DF6720 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CECC9E322C7344CE00DF6720 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CECC9E392C7344CE00DF6720;
-			remoteInfo = "async-await-http-client";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -53,9 +44,6 @@
 		CECC9E462C7344CF00DF6720 /* async_await_http_client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = async_await_http_client.entitlements; sourceTree = "<group>"; };
 		CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "async-await-http-clientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientTests.swift; sourceTree = "<group>"; };
-		CECC9E552C7344CF00DF6720 /* async-await-http-clientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "async-await-http-clientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CECC9E592C7344CF00DF6720 /* async_await_http_clientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientUITests.swift; sourceTree = "<group>"; };
-		CECC9E5B2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CECC9E6C2C7345DA00DF6720 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
 		CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpGetParameterBuilder.swift; sourceTree = "<group>"; };
 		CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpService+CustomerDomain.swift"; sourceTree = "<group>"; };
@@ -82,13 +70,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CECC9E522C7344CF00DF6720 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -97,7 +78,6 @@
 			children = (
 				CECC9E3C2C7344CE00DF6720 /* async-await-http-client */,
 				CECC9E4E2C7344CF00DF6720 /* async-await-http-clientTests */,
-				CECC9E582C7344CF00DF6720 /* async-await-http-clientUITests */,
 				CECC9E3B2C7344CE00DF6720 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,7 +87,6 @@
 			children = (
 				CECC9E3A2C7344CE00DF6720 /* async-await-http-client.app */,
 				CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */,
-				CECC9E552C7344CF00DF6720 /* async-await-http-clientUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,15 +119,6 @@
 				CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */,
 			);
 			path = "async-await-http-clientTests";
-			sourceTree = "<group>";
-		};
-		CECC9E582C7344CF00DF6720 /* async-await-http-clientUITests */ = {
-			isa = PBXGroup;
-			children = (
-				CECC9E592C7344CF00DF6720 /* async_await_http_clientUITests.swift */,
-				CECC9E5B2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift */,
-			);
-			path = "async-await-http-clientUITests";
 			sourceTree = "<group>";
 		};
 		CECC9E682C73455300DF6720 /* networking */ = {
@@ -229,24 +199,6 @@
 			productReference = CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CECC9E542C7344CF00DF6720 /* async-await-http-clientUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CECC9E652C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-clientUITests" */;
-			buildPhases = (
-				CECC9E512C7344CF00DF6720 /* Sources */,
-				CECC9E522C7344CF00DF6720 /* Frameworks */,
-				CECC9E532C7344CF00DF6720 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CECC9E572C7344CF00DF6720 /* PBXTargetDependency */,
-			);
-			name = "async-await-http-clientUITests";
-			productName = "async-await-http-clientUITests";
-			productReference = CECC9E552C7344CF00DF6720 /* async-await-http-clientUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -261,10 +213,6 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					CECC9E4A2C7344CF00DF6720 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = CECC9E392C7344CE00DF6720;
-					};
-					CECC9E542C7344CF00DF6720 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = CECC9E392C7344CE00DF6720;
 					};
@@ -285,7 +233,6 @@
 			targets = (
 				CECC9E392C7344CE00DF6720 /* async-await-http-client */,
 				CECC9E4A2C7344CF00DF6720 /* async-await-http-clientTests */,
-				CECC9E542C7344CF00DF6720 /* async-await-http-clientUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -302,13 +249,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CECC9E492C7344CF00DF6720 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CECC9E532C7344CF00DF6720 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,15 +284,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CECC9E512C7344CF00DF6720 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CECC9E5A2C7344CF00DF6720 /* async_await_http_clientUITests.swift in Sources */,
-				CECC9E5C2C7344CF00DF6720 /* async_await_http_clientUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -360,11 +291,6 @@
 			isa = PBXTargetDependency;
 			target = CECC9E392C7344CE00DF6720 /* async-await-http-client */;
 			targetProxy = CECC9E4C2C7344CF00DF6720 /* PBXContainerItemProxy */;
-		};
-		CECC9E572C7344CF00DF6720 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CECC9E392C7344CE00DF6720 /* async-await-http-client */;
-			targetProxy = CECC9E562C7344CF00DF6720 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -581,40 +507,6 @@
 			};
 			name = Release;
 		};
-		CECC9E662C7344CF00DF6720 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5727LQSV7;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-clientUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "async-await-http-client";
-			};
-			name = Debug;
-		};
-		CECC9E672C7344CF00DF6720 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5727LQSV7;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harrylundstrom.async-await-http-client.async-await-http-clientUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "async-await-http-client";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -641,15 +533,6 @@
 			buildConfigurations = (
 				CECC9E632C7344CF00DF6720 /* Debug */,
 				CECC9E642C7344CF00DF6720 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CECC9E652C7344CF00DF6720 /* Build configuration list for PBXNativeTarget "async-await-http-clientUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CECC9E662C7344CF00DF6720 /* Debug */,
-				CECC9E672C7344CF00DF6720 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -40,6 +40,8 @@ struct ContentView: View {
         .padding()
         .onAppear() {
             /*
+             Uncomment to fetch data, or run tests to enforce mock fetching.
+
             environmentModel.fetchData()
              */
         }
