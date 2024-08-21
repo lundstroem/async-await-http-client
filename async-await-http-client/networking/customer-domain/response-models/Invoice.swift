@@ -10,10 +10,10 @@ import Foundation
 extension CustomerResponse {
 
     struct Invoice: Codable, Hashable {
-        var invoiceId: Int64
-        var invoiceDate: String
-        var presentDueDate: String
-        var amount: String
+        let invoiceId: Int64
+        let invoiceDate: String
+        let presentDueDate: String
+        let amount: String
 
         /* Example of handling capitalized keys in response */
         enum CodingKeys: String, CodingKey {

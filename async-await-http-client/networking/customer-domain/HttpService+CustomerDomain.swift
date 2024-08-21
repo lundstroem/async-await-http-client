@@ -74,6 +74,9 @@ extension HttpService {
     }
 
     func verifyCustomer(customerId: String, mockStatusCode: Int? = nil) async throws -> ResponseContent? {
+
+        /* Example request which does not return JSON or data, only a status code */
+
         let url = baseUrl+"api/v1/customers/customer/verify/\(customerId)"
         let responseContent: ResponseContent = try await makeRequest(urlString: url,
                                                                      httpMethod: .post,

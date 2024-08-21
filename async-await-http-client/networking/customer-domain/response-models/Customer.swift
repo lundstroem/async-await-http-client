@@ -10,8 +10,8 @@ import Foundation
 class CustomerResponse {
 
     struct CustomerResponseObject: Codable, Hashable {
-        var customerId: Int
-        var firstName: String
-        var lastName: String
+        let customerId: Int
+        let firstName: String
+        let lastName: String
     }
 }

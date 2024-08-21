@@ -10,6 +10,6 @@ import Foundation
 extension CustomerResponse {
 
     struct ConsumptionResponse: Codable, Hashable {
-        var periodicValues: [Int]
+        let periodicValues: [Int]
     }
 }

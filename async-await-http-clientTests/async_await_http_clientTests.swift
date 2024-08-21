@@ -103,6 +103,5 @@ final class async_await_http_clientTests: XCTestCase {
         }
 
         XCTAssertTrue(jsonString.contains("\"PersonalNumber\""))
-
     }
 }
