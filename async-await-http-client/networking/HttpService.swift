@@ -65,22 +65,30 @@ class HttpService {
     /* Change useMock flag here to switch between mock and remote */
     static let shared: HttpService = HttpService(useMock: true)
 
-    let baseUrl: String = "http://127.0.0.1:7043/"
+    let scheme = "http"
+    let host = "127.0.0.1"
+    let port = 7043
+
+    var baseUrl: String {
+        "\(scheme)://\(host):\(port)"
+    }
 
     private let useMock: Bool
     private let debugPrintEnabled: Bool = true
 
-    func makeRequest(urlString: String,
+    func makeRequest(path: String,
                      httpMethod: HttpMethod = .get,
                      httpBody: Data? = nil,
+                     urlQueryItems: [URLQueryItem] = [],
                      mockResponseStatusCode: Int? = nil,
                      contentType: ContentType) async throws -> ResponseContent {
 
         /* Add auth method, api keys and anything else depending on REST API setup */
 
-        let responseContent: ResponseContent = try await makeRequestInternal(urlString: urlString,
+        let responseContent: ResponseContent = try await makeRequestInternal(path: path,
                                                                              httpMethod: httpMethod,
                                                                              httpBody: httpBody,
+                                                                             urlQueryItems: urlQueryItems,
                                                                              authHeader: nil,
                                                                              mockResponseStatusCode: mockResponseStatusCode,
                                                                              contentType: contentType)
@@ -112,14 +120,30 @@ class HttpService {
 
 private extension HttpService {
 
-    func makeRequestInternal(urlString: String,
+    func makeUrlComponents() -> URLComponents {
+        var components = URLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.port = port
+        return components
+    }
+
+    func makeRequestInternal(path: String,
                              httpMethod: HttpMethod = .get,
                              httpBody: Data? = nil,
+                             urlQueryItems: [URLQueryItem] = [],
                              authHeader: AuthHeader? = nil,
                              mockResponseStatusCode: Int? = nil,
                              contentType: ContentType) async throws -> ResponseContent {
 
-        guard let url = URL(string: urlString) else { fatalError("Missing URL") }
+        var urlComponents: URLComponents = makeUrlComponents()
+        urlComponents.path = path
+        if (!urlQueryItems.isEmpty) {
+            urlComponents.queryItems = urlQueryItems
+        }
+
+        guard let url = urlComponents.url else { fatalError("Missing URL") }
+
         var request = URLRequest(url: url)
         request.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
 
@@ -133,14 +157,15 @@ private extension HttpService {
             request.httpBody = httpBody
         }
 
-        let (data, response) = try await loadData(request: request, mockResponseStatusCode: mockResponseStatusCode)
+        let (data, response) = try await loadData(request: request, 
+                                                  mockResponseStatusCode: mockResponseStatusCode)
 
         guard let response = response as? HTTPURLResponse else {
             throw FetchError.noValidResponse
         }
 
         if debugPrintEnabled {
-            printStatusCode(response: response, urlString: urlString)
+            printStatusCode(response: response, urlString: url.absoluteString)
         }
 
         return ResponseContent(urlString: response.url?.absoluteString ?? "", statusCode: response.statusCode, data: data)
@@ -203,7 +228,7 @@ private extension HttpService {
         return (data, response)
     }
 
-    func loadMock(request: URLRequest, 
+    func loadMock(request: URLRequest,
                   mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
         var statusCode = 200
         if let mockResponseStatusCode = mockResponseStatusCode {
