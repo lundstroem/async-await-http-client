@@ -49,8 +49,9 @@ enum ContentType: String {
 }
 
 struct ResponseContent {
-    var urlString: String
-    var statusCode: Int
+
+    let urlRequest: URLRequest?
+    let response: HTTPURLResponse?
     var data: Data?
 }
 
@@ -168,7 +169,9 @@ private extension HttpService {
             printStatusCode(response: response, urlString: url.absoluteString)
         }
 
-        return ResponseContent(urlString: response.url?.absoluteString ?? "", statusCode: response.statusCode, data: data)
+        return ResponseContent(urlRequest: request, 
+                               response: response,
+                               data: data)
     }
 }
 
@@ -290,7 +293,7 @@ private extension HttpService {
     func parseDebug<T: Decodable>(responseType: T.Type, responseContent: ResponseContent) {
         guard let data = responseContent.data else { return }
 
-        print("Parsing content received from: \(responseContent.urlString)")
+        print("Parsing content received from: \(responseContent.response?.url?.absoluteString ?? "")")
         print("\(prettyPrintedJSONString(data) ?? "(error: cannot parse response)")")
 
         do {

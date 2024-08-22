@@ -35,7 +35,7 @@ extension HttpService {
                                                                      httpMethod: .post,
                                                                      httpBody: requestModel.makeHttpBodyData(),
                                                                      contentType: .json)
-        if responseContent.statusCode == 200 {
+        if responseContent.response?.statusCode == 200 {
             let object = try await decodeResponseData(decodable: CustomerResponse.CustomerResponseObject.self, responseContent: responseContent)
             return object
         }
@@ -57,7 +57,7 @@ extension HttpService {
                                                                      urlQueryItems: queryItems,
                                                                      contentType: .json)
 
-        if responseContent.statusCode == 200 {
+        if responseContent.response?.statusCode == 200 {
             let object  = try await decodeResponseData(decodable: CustomerResponse.ConsumptionResponse.self, responseContent: responseContent)
             return object
         }
@@ -68,7 +68,7 @@ extension HttpService {
         let path = "/api/v1/customers/\(customerCode)/invoices"
         let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      contentType: .json)
-        if responseContent.statusCode == 200 {
+        if responseContent.response?.statusCode == 200 {
             var object = try await decodeResponseData(decodable: CustomerResponse.InvoiceListResponseObject.self,
                                                       responseContent: responseContent)
 
@@ -87,7 +87,7 @@ extension HttpService {
         let path = "/api/v1/customers/customer/\(invoiceNumber)/invoice"
         let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      contentType: .pdf)
-        if responseContent.statusCode == 200 {
+        if responseContent.response?.statusCode == 200 {
             return responseContent
         }
         return nil
