@@ -14,7 +14,6 @@
 		CECC9E452C7344CF00DF6720 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E442C7344CF00DF6720 /* Preview Assets.xcassets */; };
 		CECC9E502C7344CF00DF6720 /* async_await_http_clientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */; };
 		CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E6C2C7345DA00DF6720 /* HttpService.swift */; };
-		CECC9E6F2C73484200DF6720 /* HttpGetParameterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */; };
 		CECC9E712C73499700DF6720 /* HttpService+CustomerDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */; };
 		CECC9E752C734ADD00DF6720 /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E742C734ADD00DF6720 /* Consumption.swift */; };
 		CECC9E772C734BC300DF6720 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E762C734BC300DF6720 /* Customer.swift */; };
@@ -45,7 +44,6 @@
 		CECC9E4B2C7344CF00DF6720 /* async-await-http-clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "async-await-http-clientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECC9E4F2C7344CF00DF6720 /* async_await_http_clientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = async_await_http_clientTests.swift; sourceTree = "<group>"; };
 		CECC9E6C2C7345DA00DF6720 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
-		CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpGetParameterBuilder.swift; sourceTree = "<group>"; };
 		CECC9E702C73499700DF6720 /* HttpService+CustomerDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpService+CustomerDomain.swift"; sourceTree = "<group>"; };
 		CECC9E742C734ADD00DF6720 /* Consumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
 		CECC9E762C734BC300DF6720 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 			children = (
 				CECC9E802C736ED500DF6720 /* mock */,
 				CECC9E6C2C7345DA00DF6720 /* HttpService.swift */,
-				CECC9E6E2C73484200DF6720 /* HttpGetParameterBuilder.swift */,
 				CE5F60592C74601700020F2A /* Utils.swift */,
 				CECC9E6B2C7345A900DF6720 /* customer-domain */,
 			);
@@ -269,7 +266,6 @@
 				CECC9E772C734BC300DF6720 /* Customer.swift in Sources */,
 				CECC9E832C73798800DF6720 /* EnvironmentModel.swift in Sources */,
 				CECC9E3E2C7344CE00DF6720 /* async_await_http_clientApp.swift in Sources */,
-				CECC9E6F2C73484200DF6720 /* HttpGetParameterBuilder.swift in Sources */,
 				CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */,
 				CECC9E7D2C734CBE00DF6720 /* Invoice.swift in Sources */,
 				CE5F605A2C74601700020F2A /* Utils.swift in Sources */,

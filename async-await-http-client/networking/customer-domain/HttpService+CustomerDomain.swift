@@ -29,9 +29,9 @@ import Foundation
 extension HttpService {
 
     func fetchCustomer(personalNumber: String) async throws -> CustomerResponse.CustomerResponseObject? {
-        let url = baseUrl+"api/v1/customers/customer"
+        let path = "/api/v1/customers/customer"
         let requestModel = CustomerRequestModel(personalNumber: personalNumber)
-        let responseContent: ResponseContent = try await makeRequest(urlString: url,
+        let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      httpMethod: .post,
                                                                      httpBody: requestModel.makeHttpBodyData(),
                                                                      contentType: .json)
@@ -46,14 +46,15 @@ extension HttpService {
                                   type: Int32,
                                   mockStatusCode: Int? = nil) async throws -> CustomerResponse.ConsumptionResponse? {
 
-        let getRequestBuilder = HttpGetParameterBuilder()
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "id", value: "\(id)"),
+            URLQueryItem(name: "type", value: "\(type)")
+            ]
 
-        getRequestBuilder.append(name: "id", int64: id)
-        getRequestBuilder.append(name: "type", int32: type)
+        let path = "/api/v1/customers/customer/consumption"
 
-        let url = baseUrl+"api/v1/customers/customer/consumption"+getRequestBuilder.parameterString
-
-        let responseContent: ResponseContent = try await makeRequest(urlString: url,
+        let responseContent: ResponseContent = try await makeRequest(path: path,
+                                                                     urlQueryItems: queryItems,
                                                                      contentType: .json)
 
         if responseContent.statusCode == 200 {
@@ -64,8 +65,8 @@ extension HttpService {
     }
 
     func fetchInvoices(customerCode: String) async throws -> CustomerResponse.InvoiceListResponseObject? {
-        let url = baseUrl+"api/v1/customers/\(customerCode)/invoices"
-        let responseContent: ResponseContent = try await makeRequest(urlString: url,
+        let path = "/api/v1/customers/\(customerCode)/invoices"
+        let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      contentType: .json)
         if responseContent.statusCode == 200 {
             var object = try await decodeResponseData(decodable: CustomerResponse.InvoiceListResponseObject.self,
@@ -83,8 +84,8 @@ extension HttpService {
     }
 
     func fetchInvoice(invoiceNumber: String) async throws -> ResponseContent? {
-        let url = baseUrl+"api/v1/customers/customer/\(invoiceNumber)/invoice"
-        let responseContent: ResponseContent = try await makeRequest(urlString: url,
+        let path = "/api/v1/customers/customer/\(invoiceNumber)/invoice"
+        let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      contentType: .pdf)
         if responseContent.statusCode == 200 {
             return responseContent
@@ -96,8 +97,8 @@ extension HttpService {
 
         /* Example request which does not return JSON or data, only a status code */
 
-        let url = baseUrl+"api/v1/customers/customer/verify/\(customerId)"
-        let responseContent: ResponseContent = try await makeRequest(urlString: url,
+        let path = "/api/v1/customers/customer/verify/\(customerId)"
+        let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      httpMethod: .post,
                                                                      mockResponseStatusCode: mockStatusCode,
                                                                      contentType: .unspecified)
