@@ -91,19 +91,19 @@ final class async_await_http_clientTests: XCTestCase {
     func testFetchMockVerification() async throws {
         let httpService = await HttpService(useMock: true)
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 200)
-        XCTAssertTrue(response?.statusCode == 200)
+        XCTAssertTrue(response?.response?.statusCode == 200)
     }
 
     func testMockVerificationWithStatus400() async throws {
         let httpService = await HttpService(useMock: true)
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 400)
-        XCTAssertTrue(response?.statusCode == 400)
+        XCTAssertTrue(response?.response?.statusCode == 400)
     }
 
     func testMockVerificationWithStatus500() async throws {
         let httpService = await HttpService(useMock: true)
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 500)
-        XCTAssertTrue(response?.statusCode == 500)
+        XCTAssertTrue(response?.response?.statusCode == 500)
     }
 
     func testCustomerRequestModelEncoding() {
