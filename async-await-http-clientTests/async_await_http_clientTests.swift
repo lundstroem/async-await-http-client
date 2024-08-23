@@ -47,61 +47,61 @@ final class async_await_http_clientTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        // self.measure {
             // Put the code you want to measure the time of here.
-        }
+        // }
     }
 
     func testFetchMockCustomer() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.fetchCustomer(personalNumber: "")
         XCTAssertNotNil(response)
     }
 
     func testFetchMockConsumption() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.fetchCustomerConsumption(id: 1, type: 1)
         XCTAssertNotNil(response?.periodicValues)
     }
 
     func testFetchMockInvoices() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.fetchInvoices(customerCode: "1")
         XCTAssertNotNil(response?.invoiceParts)
     }
 
     func testFetchMockInvoice1() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.fetchInvoice(invoiceNumber: "1")
         XCTAssertNotNil(response?.data)
     }
 
     func testFetchMockInvoice2() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.fetchInvoice(invoiceNumber: "2")
         XCTAssertNotNil(response?.data)
     }
 
     func testFetchMockInvoice3() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.fetchInvoice(invoiceNumber: "3")
         XCTAssertNotNil(response?.data)
     }
 
     func testFetchMockVerification() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 200)
         XCTAssertTrue(response?.response?.statusCode == 200)
     }
 
     func testMockVerificationWithStatus400() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 400)
         XCTAssertTrue(response?.response?.statusCode == 400)
     }
 
     func testMockVerificationWithStatus500() async throws {
-        let httpService = await HttpService(useMock: true)
+        let httpService = HttpServiceMock()
         let response = try await httpService.verifyCustomer(customerId: "1", mockStatusCode: 500)
         XCTAssertTrue(response?.response?.statusCode == 500)
     }

@@ -42,14 +42,13 @@ enum HttpMethod: String {
 }
 
 enum ContentType: String {
-    /* add more content-types if needed */
+    // add more content-types if needed
     case unspecified = "application/octet-stream"
     case json = "application/json"
     case pdf = "application/pdf"
 }
 
 struct ResponseContent {
-
     let urlRequest: URLRequest?
     let response: HTTPURLResponse?
     var data: Data?
@@ -60,11 +59,57 @@ struct AuthHeader {
     let value: String
 }
 
+/// A version of HttpService which fetches mock resources from the file system instead of a remote
+class HttpServiceMock: HttpService {
+
+    override func loadData(request: URLRequest,
+                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+        let (data, response) = try await loadMock(request: request,
+                                                  mockResponseStatusCode: mockResponseStatusCode)
+        return (data, response)
+    }
+
+    func loadMock(request: URLRequest,
+                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+        var statusCode = 200
+        if let mockResponseStatusCode = mockResponseStatusCode {
+            statusCode = mockResponseStatusCode
+        }
+
+        let contentType = request.value(forHTTPHeaderField: "Content-Type")
+        var fileEnding = "json"
+
+        if (contentType == "application/pdf") {
+            fileEnding = "pdf"
+        }
+
+        // add more mockable types if needed
+
+        if let url = request.url {
+            var filePath = url.absoluteString
+            filePath.trimPrefix(baseUrl)
+            filePath = "mock/" + filePath
+
+            let fileName = "\(statusCode)-\(request.httpMethod ?? "")"
+
+            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: fileEnding, filePath: filePath),
+               let url = URL(string: filePath) {
+
+                let urlResponse = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: "", headerFields: [:])
+                return (data, urlResponse)
+            }
+        }
+
+        return (nil, nil)
+    }
+}
+
+
 @MainActor
 class HttpService {
 
-    /* Change useMock flag here to switch between mock and remote */
-    static let shared: HttpService = HttpService(useMock: true)
+    // Change type of class here to switch between mock and remote
+    static let shared: HttpService = HttpServiceMock()
 
     let scheme = "http"
     let host = "127.0.0.1"
@@ -74,31 +119,26 @@ class HttpService {
         "\(scheme)://\(host):\(port)"
     }
 
-    private let useMock: Bool
     private let debugPrintEnabled: Bool = true
 
     func makeRequest(path: String,
                      httpMethod: HttpMethod = .get,
                      httpBody: Data? = nil,
                      urlQueryItems: [URLQueryItem] = [],
-                     mockResponseStatusCode: Int? = nil,
-                     contentType: ContentType) async throws -> ResponseContent {
+                     contentType: ContentType,
+                     mockResponseStatusCode: Int? = nil) async throws -> ResponseContent {
 
-        /* Add auth method, api keys and anything else depending on REST API setup */
+        // Add auth method, api keys and anything else depending on REST API setup
 
         let responseContent: ResponseContent = try await makeRequestInternal(path: path,
                                                                              httpMethod: httpMethod,
                                                                              httpBody: httpBody,
                                                                              urlQueryItems: urlQueryItems,
                                                                              authHeader: nil,
-                                                                             mockResponseStatusCode: mockResponseStatusCode,
-                                                                             contentType: contentType)
+                                                                             contentType: contentType,
+                                                                             mockResponseStatusCode: mockResponseStatusCode)
 
         return responseContent
-    }
-
-    init(useMock: Bool) {
-        self.useMock = useMock
     }
 
     func decodeResponseData<T: Decodable>(decodable: T.Type,
@@ -114,6 +154,13 @@ class HttpService {
 
         let decodedResponse: T = try JSONDecoder().decode(T.self, from: data)
         return decodedResponse
+    }
+
+    func loadData(request: URLRequest,
+                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        return (data, response)
     }
 }
 
@@ -134,8 +181,8 @@ private extension HttpService {
                              httpBody: Data? = nil,
                              urlQueryItems: [URLQueryItem] = [],
                              authHeader: AuthHeader? = nil,
-                             mockResponseStatusCode: Int? = nil,
-                             contentType: ContentType) async throws -> ResponseContent {
+                             contentType: ContentType,
+                             mockResponseStatusCode: Int? = nil) async throws -> ResponseContent {
 
         var urlComponents: URLComponents = makeUrlComponents()
         urlComponents.path = path
@@ -212,57 +259,6 @@ extension URLSession {
 
     func data(for request: URLRequest) async throws -> (Data, URLResponse) {
         try await URLSession.shared.data(for: request, delegate: nil)
-    }
-}
-
-// MARK: - Mock
-
-private extension HttpService {
-
-    func loadData(request: URLRequest, 
-                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-        if useMock {
-            let (data, response) = try await loadMock(request: request,
-                                                      mockResponseStatusCode: mockResponseStatusCode)
-            return (data, response)
-        }
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        return (data, response)
-    }
-
-    func loadMock(request: URLRequest,
-                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-        var statusCode = 200
-        if let mockResponseStatusCode = mockResponseStatusCode {
-            statusCode = mockResponseStatusCode
-        }
-
-        let contentType = request.value(forHTTPHeaderField: "Content-Type")
-        var fileEnding = "json"
-
-        if (contentType == "application/pdf") {
-            fileEnding = "pdf"
-        }
-
-        /* add more mockable types if needed */
-
-        if let url = request.url {
-
-            var filePath = url.absoluteString
-            filePath.trimPrefix(baseUrl)
-            filePath = "mock/" + filePath
-
-            let fileName = "\(statusCode)-\(request.httpMethod ?? "")"
-
-            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: fileEnding, filePath: filePath),
-               let url = URL(string: filePath) {
-
-                let urlResponse = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: "", headerFields: [:])
-                return (data, urlResponse)
-            }
-        }
-        return (nil, nil)
     }
 }
 
