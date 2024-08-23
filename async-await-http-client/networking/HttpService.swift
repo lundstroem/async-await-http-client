@@ -69,8 +69,8 @@ class HttpServiceMock: HttpService {
         return (data, response)
     }
 
-    func loadMock(request: URLRequest,
-                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+    private func loadMock(request: URLRequest,
+                          mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
         var statusCode = 200
         if let mockResponseStatusCode = mockResponseStatusCode {
             statusCode = mockResponseStatusCode
