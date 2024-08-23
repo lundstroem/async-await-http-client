@@ -100,8 +100,8 @@ extension HttpService {
         let path = "/api/v1/customers/customer/verify/\(customerId)"
         let responseContent: ResponseContent = try await makeRequest(path: path,
                                                                      httpMethod: .post,
-                                                                     mockResponseStatusCode: mockStatusCode,
-                                                                     contentType: .unspecified)
+                                                                     contentType: .unspecified,
+                                                                     mockResponseStatusCode: mockStatusCode)
         return responseContent
     }
 }
