@@ -51,7 +51,8 @@ import Foundation
                 let consumptionData = try await HttpService().fetchCustomerConsumption(id: 1, type: 1)
                 let invoiceListResponseData = try await HttpService().fetchInvoices(customerCode: "1")
 
-                await MainActor.run {
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
                     self.customer = customerData
                     self.consumption = consumptionData
                     self.invoiceListResponse = invoiceListResponseData
