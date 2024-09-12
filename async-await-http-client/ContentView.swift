@@ -28,7 +28,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @EnvironmentObject var environmentModel: EnvironmentModel
+    @Environment(ModelData.self) private var modelData
 
     var body: some View {
         VStack {
@@ -41,9 +41,9 @@ struct ContentView: View {
         .onAppear() {
             /*
              Uncomment to fetch data, or run tests to enforce mock fetching.
-
-            environmentModel.fetchData()
              */
+            modelData.fetchData()
+
         }
     }
 }

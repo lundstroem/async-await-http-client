@@ -20,7 +20,7 @@
 		CECC9E7D2C734CBE00DF6720 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E7C2C734CBE00DF6720 /* Invoice.swift */; };
 		CECC9E7F2C734D5E00DF6720 /* CustomerRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E7E2C734D5E00DF6720 /* CustomerRequestModel.swift */; };
 		CECC9E812C736ED500DF6720 /* mock in Resources */ = {isa = PBXBuildFile; fileRef = CECC9E802C736ED500DF6720 /* mock */; };
-		CECC9E832C73798800DF6720 /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E822C73798800DF6720 /* EnvironmentModel.swift */; };
+		CECC9E832C73798800DF6720 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC9E822C73798800DF6720 /* ModelData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 		CECC9E7C2C734CBE00DF6720 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		CECC9E7E2C734D5E00DF6720 /* CustomerRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRequestModel.swift; sourceTree = "<group>"; };
 		CECC9E802C736ED500DF6720 /* mock */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mock; sourceTree = "<group>"; };
-		CECC9E822C73798800DF6720 /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
+		CECC9E822C73798800DF6720 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 				CECC9E412C7344CF00DF6720 /* Assets.xcassets */,
 				CECC9E462C7344CF00DF6720 /* async_await_http_client.entitlements */,
 				CECC9E432C7344CF00DF6720 /* Preview Content */,
-				CECC9E822C73798800DF6720 /* EnvironmentModel.swift */,
+				CECC9E822C73798800DF6720 /* ModelData.swift */,
 			);
 			path = "async-await-http-client";
 			sourceTree = "<group>";
@@ -264,7 +264,7 @@
 				CECC9E712C73499700DF6720 /* HttpService+CustomerDomain.swift in Sources */,
 				CECC9E752C734ADD00DF6720 /* Consumption.swift in Sources */,
 				CECC9E772C734BC300DF6720 /* Customer.swift in Sources */,
-				CECC9E832C73798800DF6720 /* EnvironmentModel.swift in Sources */,
+				CECC9E832C73798800DF6720 /* ModelData.swift in Sources */,
 				CECC9E3E2C7344CE00DF6720 /* async_await_http_clientApp.swift in Sources */,
 				CECC9E6D2C7345DA00DF6720 /* HttpService.swift in Sources */,
 				CECC9E7D2C734CBE00DF6720 /* Invoice.swift in Sources */,

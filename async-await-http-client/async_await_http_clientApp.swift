@@ -29,11 +29,11 @@ import SwiftUI
 @main
 struct async_await_http_clientApp: App {
 
-    @StateObject private var environmentModel = EnvironmentModel()
+    @State private var modelData = ModelData()
 
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(environmentModel)
+            ContentView().environment(modelData)
         }
     }
 }
