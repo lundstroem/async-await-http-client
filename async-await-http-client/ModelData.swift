@@ -23,31 +23,39 @@
  SOFTWARE.
 
  */
+
 import Foundation
 
-@MainActor
-final class EnvironmentModel: ObservableObject {
+@Observable @MainActor final class ModelData {
 
-    @Published var customer: CustomerResponse.CustomerResponseObject?
-    @Published var consumption: CustomerResponse.ConsumptionResponse?
-    @Published var invoiceListResponse: CustomerResponse.InvoiceListResponseObject?
+    var customer: CustomerResponse.CustomerResponseObject?
+    var consumption: CustomerResponse.ConsumptionResponse?
+    var invoiceListResponse: CustomerResponse.InvoiceListResponseObject?
+
+    // Enable creation of instance from non main thread
+    nonisolated init() {}
 
     func fetchData() {
-        Task {
-            do {
-                customer = try await HttpService.shared.fetchCustomer(personalNumber: "")
-                consumption = try await HttpService.shared.fetchCustomerConsumption(id: 1, type: 1)
-                invoiceListResponse = try await HttpService.shared.fetchInvoices(customerCode: "1")
 
-                let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "1")
-                let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "2")
-                let _ = try await HttpService.shared.fetchInvoice(invoiceNumber: "3")
+        Task.detached(priority: .background) {
+            do {
+
+                let _ = try await HttpService().fetchInvoice(invoiceNumber: "1")
+                let _ = try await HttpService().fetchInvoice(invoiceNumber: "2")
+                let _ = try await HttpService().fetchInvoice(invoiceNumber: "3")
 
                 /* test various mock status codes */
-                let _ = try await HttpService.shared.verifyCustomer(customerId: "1", mockStatusCode: 200)
-                let _ = try await HttpService.shared.verifyCustomer(customerId: "1", mockStatusCode: 400)
-                let _ = try await HttpService.shared.verifyCustomer(customerId: "1", mockStatusCode: 500)
+                let _ = try await HttpService().verifyCustomer(customerId: "1")
 
+                let customerData = try await HttpService().fetchCustomer(personalNumber: "")
+                let consumptionData = try await HttpService().fetchCustomerConsumption(id: 1, type: 1)
+                let invoiceListResponseData = try await HttpService().fetchInvoices(customerCode: "1")
+
+                await MainActor.run {
+                    self.customer = customerData
+                    self.consumption = consumptionData
+                    self.invoiceListResponse = invoiceListResponseData
+                }
             } catch {
                 print("error \(error)")
             }

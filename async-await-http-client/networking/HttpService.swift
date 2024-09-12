@@ -59,67 +59,24 @@ struct AuthHeader {
     let value: String
 }
 
-/// A version of HttpService which fetches mock resources from the file system instead of a remote
-class HttpServiceMock: HttpService {
-
-    override func loadData(request: URLRequest,
-                  mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-        let (data, response) = try await loadMock(request: request,
-                                                  mockResponseStatusCode: mockResponseStatusCode)
-        return (data, response)
-    }
-
-    private func loadMock(request: URLRequest,
-                          mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
-        var statusCode = 200
-        if let mockResponseStatusCode = mockResponseStatusCode {
-            statusCode = mockResponseStatusCode
-        }
-
-        let contentType = request.value(forHTTPHeaderField: "Content-Type")
-        var fileEnding = "json"
-
-        if (contentType == "application/pdf") {
-            fileEnding = "pdf"
-        }
-
-        // add more mockable types if needed
-
-        if let url = request.url {
-            var filePath = url.absoluteString
-            filePath.trimPrefix(baseUrl)
-            filePath = "mock/" + filePath
-
-            let fileName = "\(statusCode)-\(request.httpMethod ?? "")"
-
-            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: fileEnding, filePath: filePath),
-               let url = URL(string: filePath) {
-
-                let urlResponse = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: "", headerFields: [:])
-                return (data, urlResponse)
-            }
-        }
-
-        return (nil, nil)
-    }
-}
-
-
-@MainActor
 class HttpService {
 
-    // Change type of class here to switch between mock and remote
-    static let shared: HttpService = HttpServiceMock()
+    let scheme = "https"
+    let host = "go-examples-433707.ew.r.appspot.com"
+    let port = 8080
+    let useSpecificPort: Bool = false
 
-    let scheme = "http"
-    let host = "127.0.0.1"
-    let port = 7043
-
-    var baseUrl: String {
-        "\(scheme)://\(host):\(port)"
+    init(mockEnabled: Bool = false) {
+        self.mockEnabled = mockEnabled
     }
 
+    var baseUrl: String {
+        useSpecificPort ? "\(scheme)://\(host):\(port)" : "\(scheme)://\(host)"
+    }
+
+    private let globalMockEnabled: Bool = true
     private let debugPrintEnabled: Bool = true
+    private let mockEnabled: Bool
 
     func makeRequest(path: String,
                      httpMethod: HttpMethod = .get,
@@ -159,8 +116,14 @@ class HttpService {
     func loadData(request: URLRequest,
                   mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
 
-        let (data, response) = try await URLSession.shared.data(for: request)
-        return (data, response)
+        if globalMockEnabled || mockEnabled {
+            let (data, response) = try await loadMock(request: request,
+                                                      mockResponseStatusCode: mockResponseStatusCode)
+            return (data, response)
+        } else {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            return (data, response)
+        }
     }
 }
 
@@ -172,7 +135,9 @@ private extension HttpService {
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
-        components.port = port
+        if useSpecificPort {
+            components.port = port
+        }
         return components
     }
 
@@ -205,7 +170,7 @@ private extension HttpService {
             request.httpBody = httpBody
         }
 
-        let (data, response) = try await loadData(request: request, 
+        let (data, response) = try await loadData(request: request,
                                                   mockResponseStatusCode: mockResponseStatusCode)
 
         guard let response = response as? HTTPURLResponse else {
@@ -216,49 +181,43 @@ private extension HttpService {
             printStatusCode(response: response, urlString: url.absoluteString)
         }
 
-        return ResponseContent(urlRequest: request, 
+        return ResponseContent(urlRequest: request,
                                response: response,
                                data: data)
     }
-}
 
-// MARK: - URLSession extension
+    private func loadMock(request: URLRequest,
+                          mockResponseStatusCode: Int? = nil) async throws -> (Data?, URLResponse?) {
+        var statusCode = 200
+        if let mockResponseStatusCode = mockResponseStatusCode {
+            statusCode = mockResponseStatusCode
+        }
 
-extension URLSession {
+        let contentType = request.value(forHTTPHeaderField: "Content-Type")
+        var fileEnding = "json"
 
-    /*
-     To get around the warning: "Passing argument of non-sendable type '(any URLSessionTaskDelegate)?'
-     outside of main actor-isolated context may introduce data races" when using Strict Concurrency Checking Complete:
+        if (contentType == "application/pdf") {
+            fileEnding = "pdf"
+        }
 
-     The warning is talking about the delegate parameter of data(from:delegate:). This parameter has a default value (nil)
-     so it is still passed, even if you are not passing anything explicitly.
+        // add more mockable types if needed
 
-     The Task is running in a main actor-isolated context, but data(from:delegate:) is not isolated to the main actor,
-     hence you are passing the delegate from a main actor-isolated context, to a non-isolated context. "Outside of main
-     actor-isolated context" as the warning says.
+        if let url = request.url {
+            var filePath = url.absoluteString
+            filePath.trimPrefix(baseUrl)
+            filePath = "mock/" + filePath
 
-     So you should call data(from:delegate:) from a non-isolated context in the first place. A simple way to do that is
-     to create a wrapper of data(from:delegate) which does not have a delegate parameter.
+            let fileName = "\(statusCode)-\(request.httpMethod ?? "")"
 
-     extension URLSession {
-         func data(from url: URL) async throws -> (Data, URLResponse) {
-             // this call is in a non-isolated context, so all is good :)
-             try await URLSession.shared.data(from: url, delegate: nil)
-         }
-     }
+            if let data = Utils.loadResourceFromBundle(name: fileName, fileEnding: fileEnding, filePath: filePath),
+               let url = URL(string: filePath) {
 
-     After that, the call in your Task { ... } will automatically resolve to the overload above. You are still calling a
-     non-isolated function from a main actor-isolated context, but this time, you are no longer passing a URLSessionTaskDelegate
-     (and URL is Sendable), so there are no warnings.
+                let urlResponse = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: "", headerFields: [:])
+                return (data, urlResponse)
+            }
+        }
 
-     Side note: in a View, consider using the task and task(id:) modifiers instead of creating a top level Task { ... }. These
-     modifiers cancels the task automatically when the view disappears.
-
-     https://stackoverflow.com/questions/78763125/passing-argument-of-non-sendable-type-any-urlsessiontaskdelegate-outside-of
-     */
-
-    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
-        try await URLSession.shared.data(for: request, delegate: nil)
+        return (nil, nil)
     }
 }
 
