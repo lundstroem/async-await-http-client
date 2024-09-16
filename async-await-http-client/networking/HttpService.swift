@@ -59,6 +59,7 @@ struct AuthHeader {
     let value: String
 }
 
+@MainActor
 class HttpService {
 
     let scheme = "https"
@@ -124,6 +125,17 @@ class HttpService {
             let (data, response) = try await URLSession.shared.data(for: request)
             return (data, response)
         }
+    }
+}
+
+// MARK: - URLSession extension
+
+extension URLSession {
+
+    // Overload to silence warning of non-sendable delegate.
+
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        try await URLSession.shared.data(for: request, delegate: nil)
     }
 }
 
